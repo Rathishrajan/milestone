@@ -1,0 +1,214 @@
+mysql> create database teachers;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> use teachers;
+Database changed
+
+Q1 . Create a table with suitable constraints and fill the table with following dataset.
+
+mysql> create table teachers_info(Teacher_ID int,Name varchar(30),Department varchar(50),Admission_date date,Salary Decimal(10,2),Gender Char(1));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc teachers_info;
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| Teacher_ID     | int           | YES  |     | NULL    |       |
+| Name           | varchar(30)   | YES  |     | NULL    |       |
+| Department     | varchar(50)   | YES  |     | NULL    |       |
+| Admission_date | date          | YES  |     | NULL    |       |
+| Salary         | decimal(10,2) | YES  |     | NULL    |       |
+| Gender         | char(1)       | YES  |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into teachers values(1,"John","Computer","2022-01-05",20000,"M"),(2,"Sakthivel","Science","2020-02-05",30000,"M"),(3,"Pavithra","Computer","2022-02-06",20000,"F"),(4,"Srija","English","2023-04-05",15000,"F"),(5,"Bala","Computer","2023-07-05",15000,"M");
+ERROR 1146 (42S02): Table 'teachers.teachers' doesn't exist
+mysql> insert into teachers_info values(1,"John","Computer","2022-01-05",20000,"M"),(2,"Sakthivel","Science","2020-02-05",30000,"M"),(3,"Pavithra","Computer","2022-02-06",20000,"F"),(4,"Srija","English","2023-04-05",15000,"F"),(5,"Bala","Computer","2023-07-05",15000,"M");
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> Select * from teachers_info;
++------------+-----------+------------+----------------+----------+--------+
+| Teacher_ID | Name      | Department | Admission_date | Salary   | Gender |
++------------+-----------+------------+----------------+----------+--------+
+|          1 | John      | Computer   | 2022-01-05     | 20000.00 | M      |
+|          2 | Sakthivel | Science    | 2020-02-05     | 30000.00 | M      |
+|          3 | Pavithra  | Computer   | 2022-02-06     | 20000.00 | F      |
+|          4 | Srija     | English    | 2023-04-05     | 15000.00 | F      |
+|          5 | Bala      | Computer   | 2023-07-05     | 15000.00 | M      |
++------------+-----------+------------+----------------+----------+--------+
+5 rows in set (0.00 sec)
+mysql> insert into teachers_info values(6,"Abirami","History","2023-09-05",15000,"F"),(7,"Nitheesh","History","2022-05-09",20000,"M");
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> Select * from teachers_info;
++------------+-----------+------------+----------------+----------+--------+
+| Teacher_ID | Name      | Department | Admission_date | Salary   | Gender |
++------------+-----------+------------+----------------+----------+--------+
+|          1 | John      | Computer   | 2022-01-05     | 20000.00 | M      |
+|          2 | Sakthivel | Science    | 2020-02-05     | 30000.00 | M      |
+|          3 | Pavithra  | Computer   | 2022-02-06     | 20000.00 | F      |
+|          4 | Srija     | English    | 2023-04-05     | 15000.00 | F      |
+|          5 | Bala      | Computer   | 2023-07-05     | 15000.00 | M      |
+|          6 | Abirami   | History    | 2023-09-05     | 15000.00 | F      |
+|          7 | Nitheesh  | History    | 2022-05-09     | 20000.00 | M      |
++------------+-----------+------------+----------------+----------+--------+
+7 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------
+
+Q2. Write an SQL Query to select all the information of teachers in computer department.
+
+mysql> Select * from teachers_info;
++------------+-----------+------------+----------------+----------+--------+
+| Teacher_ID | Name      | Department | Admission_date | Salary   | Gender |
++------------+-----------+------------+----------------+----------+--------+
+|          1 | John      | Computer   | 2022-01-05     | 20000.00 | M      |
+|          2 | Sakthivel | Science    | 2020-02-05     | 30000.00 | M      |
+|          3 | Pavithra  | Computer   | 2022-02-06     | 20000.00 | F      |
+|          4 | Srija     | English    | 2023-04-05     | 15000.00 | F      |
+|          5 | Bala      | Computer   | 2023-07-05     | 15000.00 | M      |
+|          6 | Abirami   | History    | 2023-09-05     | 15000.00 | F      |
+|          7 | Nitheesh  | History    | 2022-05-09     | 20000.00 | M      |
++------------+-----------+------------+----------------+----------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select * from teachers_info where department="Computer";
++------------+----------+------------+----------------+----------+--------+
+| Teacher_ID | Name     | Department | Admission_date | Salary   | Gender |
++------------+----------+------------+----------------+----------+--------+
+|          1 | John     | Computer   | 2022-01-05     | 20000.00 | M      |
+|          3 | Pavithra | Computer   | 2022-02-06     | 20000.00 | F      |
+|          5 | Bala     | Computer   | 2023-07-05     | 15000.00 | M      |
++------------+----------+------------+----------------+----------+--------+
+3 rows in set (0.01 sec)
+
+-------------------------------------------------------------------------
+
+Q3. Write a query to list the name of female teachers in History department.
+
+mysql> select * from teachers_info where department="history" and gender="f";
++------------+---------+------------+----------------+----------+--------+
+| Teacher_ID | Name    | Department | Admission_date | Salary   | Gender |
++------------+---------+------------+----------------+----------+--------+
+|          6 | Abirami | History    | 2023-09-05     | 15000.00 | F      |
++------------+---------+------------+----------------+----------+--------+
+1 row in set (0.00 sec)
+
+--------------------------------------------------------------------------
+
+Q4. list all names of teachers with date of admission in ascending order
+
+mysql> select name,admission_date from teachers_info from order by admission_date asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from order by admission_date asc' at line 1
+mysql> select * from teachers_info where name,admission_date from order by admission_date asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',admission_date from order by admission_date asc' at line 1
+mysql> select Name,Admission_date from teachers_info order by Admission_date ASC;
++-----------+----------------+
+| Name      | Admission_date |
++-----------+----------------+
+| Sakthivel | 2020-02-05     |
+| John      | 2022-01-05     |
+| Pavithra  | 2022-02-06     |
+| Nitheesh  | 2022-05-09     |
+| Srija     | 2023-04-05     |
+| Bala      | 2023-07-05     |
+| Abirami   | 2023-09-05     |
++-----------+----------------+
+7 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------
+
+Q5. display Teacher’s name, Department, and Salary of male teacher.
+
+mysql> select name,department,salary from teachers_info where gender="M";
++-----------+------------+----------+
+| name      | department | salary   |
++-----------+------------+----------+
+| John      | Computer   | 20000.00 |
+| Sakthivel | Science    | 30000.00 |
+| Bala      | Computer   | 15000.00 |
+| Nitheesh  | History    | 20000.00 |
++-----------+------------+----------+
+4 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------
+
+Q6. To count the number of items whose salary is less than 10,000
+
+mysql> select count(*) from teachers_info where salary < 10000;
++----------+
+| count(*) |
++----------+
+|        0 |
++----------+
+1 row in set (0.01 sec)
+
+----------------------------------------------------------------------------
+
+Q7.  To insert a new record in the Teacher table with the following data: 8,”Mersha”,
+”computer”,{1/1/2000},12000,”m”
+
+mysql> insert into teachers_info values(8,"keerthana","Computer","2022-02-05",25000,"F");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from teachers_info;
++------------+-----------+------------+----------------+----------+--------+
+| Teacher_ID | Name      | Department | Admission_date | Salary   | Gender |
++------------+-----------+------------+----------------+----------+--------+
+|          1 | John      | Computer   | 2022-01-05     | 20000.00 | M      |
+|          2 | Sakthivel | Science    | 2020-02-05     | 30000.00 | M      |
+|          3 | Pavithra  | Computer   | 2022-02-06     | 20000.00 | F      |
+|          4 | Srija     | English    | 2023-04-05     | 15000.00 | F      |
+|          5 | Bala      | Computer   | 2023-07-05     | 15000.00 | M      |
+|          6 | Abirami   | History    | 2023-09-05     | 15000.00 | F      |
+|          7 | Nitheesh  | History    | 2022-05-09     | 20000.00 | M      |
+|          8 | keerthana | Computer   | 2022-02-05     | 25000.00 | F      |
++------------+-----------+------------+----------------+----------+--------+
+8 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------
+
+Q8. List the teacher detail who is getting the minimum salary.
+
+mysql> select * from teachers_info where salary=(select min(salary)from teachers_info);
++------------+---------+------------+----------------+----------+--------+
+| Teacher_ID | Name    | Department | Admission_date | Salary   | Gender |
++------------+---------+------------+----------------+----------+--------+
+|          4 | Srija   | English    | 2023-04-05     | 15000.00 | F      |
+|          5 | Bala    | Computer   | 2023-07-05     | 15000.00 | M      |
+|          6 | Abirami | History    | 2023-09-05     | 15000.00 | F      |
++------------+---------+------------+----------------+----------+--------+
+3 rows in set (0.01 sec)
+
+-----------------------------------------------------------------------------
+
+Q9.  List the teacher detail who is getting the second minimum salary.
+
+mysql> select * from teachers_info where salary=(select min(salary)from teachers_info where salary);
++------------+---------+------------+----------------+----------+--------+
+| Teacher_ID | Name    | Department | Admission_date | Salary   | Gender |
++------------+---------+------------+----------------+----------+--------+
+|          4 | Srija   | English    | 2023-04-05     | 15000.00 | F      |
+|          5 | Bala    | Computer   | 2023-07-05     | 15000.00 | M      |
+|          6 | Abirami | History    | 2023-09-05     | 15000.00 | F      |
++------------+---------+------------+----------------+----------+--------+
+3 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------
+
+Q10. List down the average salary of the teachers belongs to History department  
+
+mysql> select avg(salary)as averagesalary from teachers_info where department="History"
+    ->
+    -> ;
++---------------+
+| averagesalary |
++---------------+
+|  17500.000000 |
++---------------+
+1 row in set (0.00 sec)
+
+-----------------------------------------------------------------------------
